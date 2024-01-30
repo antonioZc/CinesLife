@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/*Le damos estilos al body usando un radial gradient para darle una mejor apariencia al background
+tambien se importó la font-family de Poppins para tener una mejor tipografìa*/
+body{   
+    min-height: 100vh;
+    background: radial-gradient(circle at center top,rgb(10,28,58) 0px,rgb(5,17,34) 900px,rgb(5,17,34));
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*Creamos un contenedor generico que será usado en diferentes elementos*/
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+/*HEADER*/
+/*Estilos para la cabecera usando flexbox aplicando las propiedades para que pueda adaptarse diferentes anchos de viewport*/
+.cabecera{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+    flex-wrap: wrap;
+}
+
+.title{
+    font-size: 2rem;
+}
+
+.cabecera__links{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/*le damos un overflow hidden para que lo que salga no se muestre*/
+.cabecera__link{
+    text-decoration: none;
+    color: white;
+    transition: .3s ease;
+    overflow: hidden;
+}
+/*Usamos un after en el elemento cabecera__link para crear una linea abajo del texto,
+gracias al overflow hidden y transform: translateX(-100%); el elemento se oculta a la izquierda
+*/
+.cabecera__link::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: steelblue;
+    transform: translateX(-100%);
+    transition: .3s ease;
+}
+
+/*Hacemos que la linea se muestre cuando se pasa el ratón sobre el elemento, gracias al
+transition declarado anteriormente este nos crea una interesante animación
+*/
+
+.cabecera__link:hover::after{
+    content: "";
+    transform: translateX(0);
+}
+/*Se usa una imagen para la presentacion con un object-fit cover, de este modo la imagen no se deforma*/
+.presentacion__img{
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+/*FIN HEADER*/
+
+/*MAIN*/
+
+.main{
+    margin: 40px auto;
+}
+
+/*empleamos el display grid para crear el layot del main, creamos las filas y las columnas con las
+grid-template-areas, asi le damos una apariencia visual similar a la estructura proporcionada para
+la realización del ejercicio. Cada una de los nombres de areas serán empleados en los contenedores de 
+las secciones correspondientes
+*/
+.main__grid{
+    display: grid;
+    grid-template-areas: 
+    "pri pri pri pri pri sec sec sec"
+    "pri pri pri pri pri sec sec sec"
+    "pri pri pri pri pri sec sec sec"
+    "pri pri pri pri pri sec sec sec"
+    "img img img img img img img img"    
+;
+gap: 5px;
+}
+
+.grid__principal{
+    grid-area: pri;
+    display: flex;
+}
+
+.principal__movie{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.movie__portada{
+    width: 100% ;
+    object-fit: cover;
+}
+
+.table__td{
+    padding: 10px;
+}
+
+.principal__menu{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.menu__link{
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+    transition: .3s ease;
+}
+
+.menu__link:hover{
+    color: steelblue;
+}
+
+/*Le damos unos bordes arriba y abajo al link central para darle una apariencia visual que
+denote al usuario que son links*/
+.menu__link--border{
+    border-top: 1.5px solid white;
+    border-bottom: 1.5px solid white;
+}
+
+/*Para las imagenes de abajo gracias al flexbox le damos un espaciado equitativo con el primer y el ultimo 
+elemento pegado a sus esquinas*/
+.grid__images{
+    display: flex;
+    grid-area: img;
+    justify-content: space-between;
+}
+
+.images__img{
+    width: 24%;
+    object-fit: cover;
+}
+
+.grid__secundario{
+    grid-area: sec;
+}
+
+.secundario__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*FIN MAIN*/
+
+/*FOOTER*/
+.footer{
+    background-color: rgb(1, 10, 23);
+    padding: 30px 0;
+}
+
+.footer__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.social__links{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.social__correo{
+    text-decoration: none;
+    color: white;
+    transition: .3s ease;
+}
+
+.social__correo:hover{
+    color: steelblue;
+}
+
+/*FIN FOOTER*/
+
+@media(max-width: 900px){
+    .main__grid{
+        display: grid;
+        grid-template-areas: 
+        "pri pri pri sec sec sec sec sec"
+        "pri pri pri sec sec sec sec sec"
+        "pri pri pri sec sec sec sec sec"
+        "pri pri pri sec sec sec sec sec"
+        "img img img img img img img img"    
+    ;
+    gap: 5px;
+    }
+    .grid__principal{
+        flex-direction: column;
+    }
+
+    .principal__menu{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .menu__link--border{
+        border-top:unset;
+        border-bottom: unset;
+        border-left: 1.5px solid white;
+        border-right: 1.5px solid white;
+    }
+}
+
+@media(max-width: 700px){
+    .main__grid{
+        display: flex;
+        flex-direction: column;
+    gap: 10px;
+    }
+
+    .grid__images{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: wrap;
+        
+    }
+
+    .images__img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    
+
+    .secundario__img{
+        width: 100%;
+        height: 500px;
+        object-fit: contain;
+        align-self: center;
+    }
+}
+
+@media(max-width: 550px){
+    .cabecera{
+        flex-direction: column;
+    }
+
+    .cabecera__links{
+        justify-content: center;
+    }
+
+    .principal__menu{
+        justify-content: center;
+    }
+
+    .footer__container{
+        flex-direction: column;
+    }
+}
